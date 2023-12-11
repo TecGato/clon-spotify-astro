@@ -12,11 +12,20 @@ import SideMenuitem from './SideMenuitem.astro';
         <HomeIcon />
          Home
       </SideMenuitem>
+
       <SideMenuitem href="/#">
         <SearchIcon />
          Search
       </SideMenuitem>
-      <LibraryIcon />
+    </ul>
+  </div>
+
+  <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+    <ul>
+      <SideMenuitem>
+        <LibraryIcon />
+         Your Library
+      </SideMenuitem>
     </ul>
   </div>
 </nav>
