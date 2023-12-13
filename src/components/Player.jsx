@@ -74,8 +74,7 @@ export const CurrentSong = ({ image, title, artists }) => {
   );
 };
 
-const VolumeControl = () => {
-  const volume = usePlayerStore((state) => state.volume);
+const VolumeControl = ({ volume }) => {
   const setVolume = usePlayerStore((state) => state.setVolume);
 
   return (
@@ -97,7 +96,7 @@ const VolumeControl = () => {
 };
 
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying } = usePlayerStore(
+  const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
     (state) => state
   );
   const audioRef = useRef();
@@ -112,11 +111,15 @@ export function Player() {
   }, [isPlaying]);
 
   useEffect(() => {
+    audioRef.current.volume = volume;
+  }, [volume]);
+
+  useEffect(() => {
     const { song, playlist, songs } = currentMusic;
     if (song) {
       const src = `/music/${playlist.id}/0${song.id}.mp3`;
       audioRef.current.src = src;
-      audioRef.current.volume = volumeRef.current;
+      audioRef.current.volume = volume;
       audioRef.current.play();
     }
   }, [currentMusic]);
@@ -140,7 +143,7 @@ export function Player() {
       </div>
 
       <div className="grid place-content-center">
-        <VolumeControl />
+        <VolumeControl volume={volume} />
       </div>
 
       <audio ref={audioRef} />
