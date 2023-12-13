@@ -3,7 +3,7 @@ import { usePlayerStore } from '@/store/playerStore';
 
 export function CardPlayButton({ id }) {
   const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } =
-    usePlayerStore();
+    usePlayerStore((state) => state);
 
   const handleClick = () => {
     setCurrentMusic({
@@ -11,9 +11,11 @@ export function CardPlayButton({ id }) {
         id,
       },
     });
+
+    setIsPlaying(!isPlaying);
   };
 
-  const isPlayingPlayMusic = isPlaying && currentMusic?.id === id;
+  const isPlayingPlayMusic = isPlaying && currentMusic?.playlist.id === id;
 
   return (
     <button
