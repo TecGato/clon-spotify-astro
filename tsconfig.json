@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "noImplicitAny": false,
-    "baseUrl": "C:/Users/Franc/clon-spotify-astro",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@/components/*": ["src/components/*"],
